@@ -1,0 +1,210 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard Utama - SPK Pemilihan Mobil AHP{% endblock %}
+{% block page_title %}Dashboard Utama{% endblock %}
+{% block page_subtitle %}Ringkasan Eksekutif Sistem Pendukung Keputusan Pemilihan Mobil Metode AHP{% endblock %}
+
+{% block content %}
+<div class="dashboard-page">
+
+    <!-- Hero / Welcome Banner -->
+    <div class="welcome-banner">
+        <div class="banner-content">
+            <div class="banner-badge">
+                <i class="fa-solid fa-sparkles"></i>
+                <span>Analytical Hierarchy Process (AHP) v2.0</span>
+            </div>
+            <h2 class="banner-title">Keputusan Pembelian Mobil Berbasis Algoritma AHP</h2>
+            <p class="banner-desc">
+                Sistem ini menghitung prioritas pembobotan multi-kriteria secara objektif melalui matriks perbandingan berpasangan, menguji rasio konsistensi logis (CR ≤ 0,10), dan memberikan rekomendasi mobil terbaik berdasarkan data terverifikasi.
+            </p>
+            <div class="banner-actions">
+                <a href="{{ url_for('page_hasil') }}" class="btn btn-primary btn-sm">
+                    <i class="fa-solid fa-trophy"></i> Lihat Rekomendasi Akhir
+                </a>
+                <a href="{{ url_for('page_perhitungan') }}" class="btn btn-outline-light btn-sm">
+                    <i class="fa-solid fa-calculator"></i> Pelajari Tahapan Hitung
+                </a>
+            </div>
+        </div>
+        <div class="banner-stat-spotlight" id="winnerSpotlight">
+            <div class="spotlight-tag"><i class="fa-solid fa-crown text-warning"></i> Mobil Terpilih</div>
+            <h3 class="spotlight-car-name" id="spotlightCarName">Memuat...</h3>
+            <div class="spotlight-score-badge">
+                <span class="spotlight-score-label">Skor Akhir AHP:</span>
+                <span class="spotlight-score-val" id="spotlightScoreVal">0.0000</span>
+            </div>
+            <p class="spotlight-note" id="spotlightCarNote">Peringkat 1 dengan performa tertinggi pada kriteria Keandalan & Efisiensi.</p>
+        </div>
+    </div>
+
+    <!-- 4 Key Metric Stat Cards -->
+    <div class="stats-grid">
+        <!-- Card 1: Total Alternatif -->
+        <div class="stat-card">
+            <div class="stat-icon-wrapper bg-blue-subtle text-primary">
+                <i class="fa-solid fa-car"></i>
+            </div>
+            <div class="stat-info">
+                <span class="stat-label">Total Alternatif Mobil</span>
+                <h3 class="stat-value" id="statTotalAlts">-</h3>
+                <span class="stat-subtext">Avanza, Xenia, Ertiga, Livina</span>
+            </div>
+        </div>
+
+        <!-- Card 2: Total Kriteria -->
+        <div class="stat-card">
+            <div class="stat-icon-wrapper bg-indigo-subtle text-indigo">
+                <i class="fa-solid fa-layer-group"></i>
+            </div>
+            <div class="stat-info">
+                <span class="stat-label">Total Kriteria Penilaian</span>
+                <h3 class="stat-value" id="statTotalCrits">-</h3>
+                <span class="stat-subtext">Style, Keandalan, Konsumsi BBM</span>
+            </div>
+        </div>
+
+        <!-- Card 3: Mobil Peringkat 1 -->
+        <div class="stat-card">
+            <div class="stat-icon-wrapper bg-emerald-subtle text-success">
+                <i class="fa-solid fa-medal"></i>
+            </div>
+            <div class="stat-info">
+                <span class="stat-label">Mobil Rekomendasi Terbaik</span>
+                <h3 class="stat-value text-success" id="statTopCar">-</h3>
+                <span class="stat-subtext">Berdasarkan bobot sintesis AHP</span>
+            </div>
+        </div>
+
+        <!-- Card 4: Konsistensi Matriks -->
+        <div class="stat-card">
+            <div class="stat-icon-wrapper bg-amber-subtle text-warning">
+                <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <div class="stat-info">
+                <span class="stat-label">Status Konsistensi (CR)</span>
+                <div class="stat-badge-wrapper">
+                    <span class="badge-status badge-success" id="statConsistencyBadge">
+                        <i class="fa-solid fa-circle-check"></i> Konsisten (CR ≤ 0.10)
+                    </span>
+                </div>
+                <span class="stat-subtext" id="statConsistencyText">Semua 4 matriks valid</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Charts Section -->
+    <div class="charts-grid-2">
+        <!-- Chart 1: Peringkat Skor Mobil (Bar Chart) -->
+        <div class="card chart-card">
+            <div class="card-header">
+                <div class="card-title-box">
+                    <i class="fa-solid fa-chart-column text-primary card-header-icon"></i>
+                    <div>
+                        <h3 class="card-title">Peringkat & Skor Akhir Mobil</h3>
+                        <p class="card-subtitle">Perbandingan skor global preferensi AHP untuk setiap mobil</p>
+                    </div>
+                </div>
+                <div class="card-tools">
+                    <span class="badge badge-primary">Nilai Preferensi Global</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chart-container" style="height: 320px; position: relative;">
+                    <canvas id="chartRanking"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart 2: Bobot Kriteria Penilaian (Doughnut Chart) -->
+        <div class="card chart-card">
+            <div class="card-header">
+                <div class="card-title-box">
+                    <i class="fa-solid fa-chart-pie text-indigo card-header-icon"></i>
+                    <div>
+                        <h3 class="card-title">Bobot Prioritas Kriteria</h3>
+                        <p class="card-subtitle">Persentase pengaruh setiap kriteria terhadap keputusan akhir</p>
+                    </div>
+                </div>
+                <div class="card-tools">
+                    <span class="badge badge-indigo">Priority Vector (w)</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chart-container" style="height: 320px; position: relative;">
+                    <canvas id="chartCriteria"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Radar Chart & Summary Section -->
+    <div class="charts-grid-2" style="margin-top: 24px;">
+        <!-- Radar Chart: Multi-criteria Comparison -->
+        <div class="card chart-card">
+            <div class="card-header">
+                <div class="card-title-box">
+                    <i class="fa-solid fa-spider-web text-warning card-header-icon"></i>
+                    <div>
+                        <h3 class="card-title">Profil Kinerja Multi-Kriteria</h3>
+                        <p class="card-subtitle">Kekuatan relatif setiap mobil pada Style, Keandalan, dan BBM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chart-container" style="height: 320px; position: relative;">
+                    <canvas id="chartRadar"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ringkasan Rekomendasi Eksekutif -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title-box">
+                    <i class="fa-solid fa-file-lines text-success card-header-icon"></i>
+                    <div>
+                        <h3 class="card-title">Ringkasan Analisis Keputusan</h3>
+                        <p class="card-subtitle">Kesimpulan matematis dari perhitungan AHP</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="recommendation-summary-box">
+                    <div class="rec-icon-large">
+                        <i class="fa-solid fa-car-on"></i>
+                    </div>
+                    <div class="rec-text-details">
+                        <h4 class="rec-headline" id="recHeadline">Mobil Terbaik: Suzuki Ertiga</h4>
+                        <p class="rec-paragraph" id="recParagraph">
+                            Berdasarkan hasil pembobotan AHP pada studi kasus, kriteria <strong>Keandalan (55,71%)</strong> memiliki pengaruh paling dominan dalam penentuan pilihan, diikuti kriteria <strong>Style (32,02%)</strong> dan <strong>Konsumsi BBM (12,26%)</strong>.
+                        </p>
+                        <p class="rec-paragraph">
+                            <strong>Ertiga</strong> unggul secara signifikan pada kriteria Keandalan (bobot lokal 0,5256) serta kriteria Style (0,4365), menghasilkan akumulasi skor akhir <strong>0,4814 (48,14%)</strong>, menjadikannya rekomendasi prioritas utama yang paling rasional dan konsisten.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Quick consistency list -->
+                <div class="mini-consistency-list" id="miniConsistencyList">
+                    <h5 class="mini-list-title"><i class="fa-solid fa-check-double text-success"></i> Verifikasi Konsistensi Seluruh Matriks:</h5>
+                    <div class="consistency-tags" id="consistencyTagsContainer">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (typeof loadDashboardPage === "function") {
+            loadDashboardPage();
+        }
+    });
+</script>
+{% endblock %}

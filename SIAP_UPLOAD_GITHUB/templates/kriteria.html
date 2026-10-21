@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+
+{% block title %}Data Kriteria & Bobot - SPK Pemilihan Mobil AHP{% endblock %}
+{% block page_title %}Data Kriteria Penilaian{% endblock %}
+{% block page_subtitle %}Matriks Perbandingan Berpasangan, Normalisasi, dan Bobot Prioritas Kriteria{% endblock %}
+
+{% block content %}
+<div class="kriteria-page">
+
+    <!-- Top Criteria Summary Cards -->
+    <div class="criteria-cards-grid" id="criteriaSummaryCards">
+        <!-- Rendered by JS: S (Style), K (Keandalan), B (Konsumsi BBM) -->
+        <div class="card p-4 text-center">
+            <i class="fa-solid fa-spinner fa-spin"></i> Memuat kriteria...
+        </div>
+    </div>
+
+    <!-- 2 Column Layout: Matrix Table & Priority Weight Chart -->
+    <div class="charts-grid-2" style="margin-top: 24px;">
+        
+        <!-- Matriks Perbandingan Berpasangan Kriteria -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title-box">
+                    <i class="fa-solid fa-table-cells text-primary card-header-icon"></i>
+                    <div>
+                        <h3 class="card-title">1. Matriks Perbandingan Berpasangan (Kriteria)</h3>
+                        <p class="card-subtitle">Nilai preferensi perbandingan antar kriteria berdasarkan data Excel (Baris 17-21)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body table-responsive">
+                <table class="data-table matrix-table" id="rawCriteriaTable">
+                    <thead>
+                        <tr>
+                            <th>Kriteria</th>
+                            <th>Style (S)</th>
+                            <th>Keandalan (K)</th>
+                            <th>Konsumsi BBM (B)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rawCriteriaTableBody">
+                        <tr><td colspan="4" class="text-center py-3"><i class="fa-solid fa-spinner fa-spin"></i> Memuat data...</td></tr>
+                    </tbody>
+                    <tfoot id="rawCriteriaTableFoot">
+                        <!-- Total kolom baris footer -->
+                    </tfoot>
+                </table>
+
+                <div class="matrix-legend-box">
+                    <span class="legend-item"><span class="color-dot green"></span> Hijau: Input perbandingan</span>
+                    <span class="legend-item"><span class="color-dot blue"></span> Biru: Kebalikan (1 / nilai)</span>
+                    <span class="legend-item"><span class="color-dot gray"></span> Abu-abu: Nilai diagonal (1.0)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grafik Bobot Prioritas Kriteria -->
+        <div class="card chart-card">
+            <div class="card-header">
+                <div class="card-title-box">
+                    <i class="fa-solid fa-chart-pie text-indigo card-header-icon"></i>
+                    <div>
+                        <h3 class="card-title">Persentase Pengaruh Kriteria</h3>
+                        <p class="card-subtitle">Visualisasi bobot prioritas hasil normalisasi AHP</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chart-container" style="height: 280px; position: relative;">
+                    <canvas id="chartCriteriaWeights"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Normalisasi & Bobot Prioritas Table -->
+    <div class="card" style="margin-top: 24px;">
+        <div class="card-header">
+            <div class="card-title-box">
+                <i class="fa-solid fa-square-root-variable text-success card-header-icon"></i>
+                <div>
+                    <h3 class="card-title">2. Normalisasi Matriks & Perhitungan Bobot Prioritas (Eigen Vector)</h3>
+                    <p class="card-subtitle">Setiap elemen dibagi jumlah kolomnya, lalu dihitung rata-rata barisnya (Baris 23-27 Excel)</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-body table-responsive">
+            <table class="data-table matrix-table" id="normalizedCriteriaTable">
+                <thead>
+                    <tr>
+                        <th>Kriteria</th>
+                        <th>Style (S)</th>
+                        <th>Keandalan (K)</th>
+                        <th>Konsumsi BBM (B)</th>
+                        <th class="highlight-col">Vektor Jumlah</th>
+                        <th class="highlight-priority">Bobot Prioritas (w)</th>
+                        <th>Persentase</th>
+                        <th class="highlight-eigen">Eigen Value (ColSum * w)</th>
+                    </tr>
+                </thead>
+                <tbody id="normalizedCriteriaTableBody">
+                    <tr><td colspan="8" class="text-center py-3"><i class="fa-solid fa-spinner fa-spin"></i> Memuat perhitungan...</td></tr>
+                </tbody>
+                <tfoot id="normalizedCriteriaTableFoot"></tfoot>
+            </table>
+        </div>
+    </div>
+
+    <!-- Uji Konsistensi Kriteria Card -->
+    <div class="card" style="margin-top: 24px;">
+        <div class="card-header">
+            <div class="card-title-box">
+                <i class="fa-solid fa-shield-check text-warning card-header-icon"></i>
+                <div>
+                    <h3 class="card-title">3. Uji Konsistensi Logis Matriks Kriteria</h3>
+                    <p class="card-subtitle">Parameter validasi Saaty: Lambda Max, Consistency Index (CI), dan Consistency Ratio (CR)</p>
+                </div>
+            </div>
+            <div class="card-tools">
+                <span class="badge-status badge-success" id="critConsistencyStatusBadge">
+                    <i class="fa-solid fa-circle-check"></i> Konsisten (CR ≤ 0.10)
+                </span>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="consistency-metrics-grid">
+                <div class="metric-item">
+                    <span class="metric-label">Ukuran Matriks (n)</span>
+                    <h4 class="metric-val">3</h4>
+                    <span class="metric-sub">Kriteria Penilaian</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">Lambda Maksimum (&lambda; max)</span>
+                    <h4 class="metric-val" id="critLambdaMax">3.023413</h4>
+                    <span class="metric-sub">&Sigma; (Total Kolom &times; Bobot)</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">Consistency Index (CI)</span>
+                    <h4 class="metric-val" id="critCI">0.011706</h4>
+                    <span class="metric-sub">(&lambda; max - n) / (n - 1)</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-label">Random Index (RI) Saaty</span>
+                    <h4 class="metric-val" id="critRI">0.58</h4>
+                    <span class="metric-sub">Tabel Saaty untuk n = 3</span>
+                </div>
+                <div class="metric-item highlight-border">
+                    <span class="metric-label">Consistency Ratio (CR)</span>
+                    <h4 class="metric-val text-success" id="critCR">0.020183</h4>
+                    <span class="metric-sub">CI / RI = 2,02% &le; 10%</span>
+                </div>
+            </div>
+
+            <!-- Mathematical Explanation Alert -->
+            <div class="explanation-box" style="margin-top: 16px;">
+                <div class="exp-icon"><i class="fa-solid fa-circle-question text-primary"></i></div>
+                <div class="exp-content">
+                    <h5 class="exp-title">Interpretasi Hasil Uji Konsistensi:</h5>
+                    <p class="exp-text">
+                        Nilai <strong>Consistency Ratio (CR) = 0,020183 (2,02%)</strong> berada jauh di bawah ambang batas toleransi Saaty yaitu <strong>0,10 (10%)</strong>. 
+                        Hal ini membuktikan secara matematis bahwa preferensi perbandingan antar kriteria yang diberikan penilai adalah <strong>sangat logis, konsisten, dan dapat dipercaya</strong> untuk digunakan dalam pengambilan keputusan.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skala Saaty Reference Card -->
+    <div class="card" style="margin-top: 24px;">
+        <div class="card-header">
+            <div class="card-title-box">
+                <i class="fa-solid fa-scale-balanced text-secondary card-header-icon"></i>
+                <div>
+                    <h3 class="card-title">Referensi Skala Penilaian Perbandingan Berpasangan (Thomas L. Saaty 1-9)</h3>
+                    <p class="card-subtitle">Standar acuan internasional dalam penentuan nilai matriks AHP</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-body table-responsive">
+            <table class="data-table reference-table">
+                <thead>
+                    <tr>
+                        <th style="width: 120px;">Intensitas Nilai</th>
+                        <th>Keterangan Definisi</th>
+                        <th>Penjelasan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge badge-primary">1</span></td>
+                        <td><strong>Sama penting (Equal Importance)</strong></td>
+                        <td>Kedua elemen memiliki pengaruh yang setara terhadap tujuan.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">3</span></td>
+                        <td><strong>Sedikit lebih penting (Moderate Importance)</strong></td>
+                        <td>Pengalaman dan penilaian sedikit memihak pada satu elemen dibanding yang lain.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">5</span></td>
+                        <td><strong>Lebih penting (Strong Importance)</strong></td>
+                        <td>Satu elemen secara kuat dan jelas lebih disukai atau diutamakan.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">7</span></td>
+                        <td><strong>Sangat penting (Very Strong / Demonstrated)</strong></td>
+                        <td>Satu elemen terbukti sangat dominan dan unggul secara signifikan.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-primary">9</span></td>
+                        <td><strong>Mutlak lebih penting (Extreme Importance)</strong></td>
+                        <td>Perbedaan preferensi berada pada tingkat keyakinan tertinggi yang dimungkinkan.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-neutral">2, 4, 6, 8</span></td>
+                        <td><strong>Nilai-nilai antara (Intermediate Values)</strong></td>
+                        <td>Digunakan ketika diperlukan kompromi di antara dua pertimbangan di atas.</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge badge-neutral">Kebalikan (1/x)</span></td>
+                        <td><strong>Resiprokal (Reciprocal)</strong></td>
+                        <td>Jika elemen i bernilai x terhadap j, maka elemen j bernilai 1/x terhadap i.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (typeof loadKriteriaPage === "function") {
+            loadKriteriaPage();
+        }
+    });
+</script>
+{% endblock %}

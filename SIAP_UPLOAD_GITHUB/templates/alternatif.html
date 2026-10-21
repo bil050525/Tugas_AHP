@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block title %}Data Alternatif Mobil - SPK Pemilihan Mobil AHP{% endblock %}
+{% block page_title %}Data Alternatif Mobil{% endblock %}
+{% block page_subtitle %}Daftar Mobil Pilihan, Evaluasi Kriteria, dan Peringkat Akhir AHP{% endblock %}
+
+{% block content %}
+<div class="alternatif-page">
+
+    <!-- Overview Bar -->
+    <div class="card filter-bar-card">
+        <div class="card-body filter-bar-body">
+            <div class="search-input-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="altSearchInput" class="form-control" placeholder="Cari nama mobil (misal: Ertiga, Avanza, Livina)...">
+            </div>
+            
+            <div class="filter-controls">
+                <div class="select-wrapper">
+                    <label for="rankFilterSelect" class="filter-label">Filter Peringkat:</label>
+                    <select id="rankFilterSelect" class="form-select">
+                        <option value="all">Semua Peringkat</option>
+                        <option value="1">Peringkat 1 (Terbaik)</option>
+                        <option value="top2">Top 2</option>
+                        <option value="other">Peringkat Lainnya</option>
+                    </select>
+                </div>
+
+                <div class="select-wrapper">
+                    <label for="sortBySelect" class="filter-label">Urutkan Berdasarkan:</label>
+                    <select id="sortBySelect" class="form-select">
+                        <option value="rank-asc">Peringkat (1 &rarr; 4)</option>
+                        <option value="rank-desc">Peringkat (4 &rarr; 1)</option>
+                        <option value="name-asc">Nama Mobil (A &rarr; Z)</option>
+                        <option value="score-desc">Skor Akhir Tertinggi</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-outline btn-sm" id="btnResetFilter" title="Reset filter dan pencarian">
+                    <i class="fa-solid fa-arrows-rotate"></i> Reset
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Table Card -->
+    <div class="card" style="margin-top: 20px;">
+        <div class="card-header">
+            <div class="card-title-box">
+                <i class="fa-solid fa-table-list text-primary card-header-icon"></i>
+                <div>
+                    <h3 class="card-title">Matriks Skor Alternatif Mobil</h3>
+                    <p class="card-subtitle">Data dinamis yang diperoleh dari pembobotan matriks perbandingan berpasangan AHP</p>
+                </div>
+            </div>
+            <div class="card-tools">
+                <span class="badge badge-neutral" id="altCountBadge">Total: 4 Mobil</span>
+            </div>
+        </div>
+        
+        <div class="card-body table-responsive">
+            <table class="data-table" id="alternativesTable">
+                <thead>
+                    <tr>
+                        <th class="sortable" data-sort="rank">Peringkat <i class="fa-solid fa-sort"></i></th>
+                        <th class="sortable" data-sort="name">Nama Alternatif <i class="fa-solid fa-sort"></i></th>
+                        <th class="sortable text-center" data-sort="style">Skor Style (32.02%) <i class="fa-solid fa-sort"></i></th>
+                        <th class="sortable text-center" data-sort="keandalan">Skor Keandalan (55.71%) <i class="fa-solid fa-sort"></i></th>
+                        <th class="sortable text-center" data-sort="bbm">Skor BBM (12.26%) <i class="fa-solid fa-sort"></i></th>
+                        <th class="sortable text-right" data-sort="final">Skor Akhir AHP <i class="fa-solid fa-sort"></i></th>
+                        <th class="text-center">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="alternativesTableBody">
+                    <tr>
+                        <td colspan="7" class="text-center py-4 text-muted">
+                            <i class="fa-solid fa-spinner fa-spin"></i> Memuat data alternatif dari backend Python...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Alternative Detail Profile Cards Grid -->
+    <div class="section-title-box" style="margin-top: 32px;">
+        <h3 class="section-title"><i class="fa-solid fa-id-card text-primary"></i> Profil Komparasi Setiap Alternatif Mobil</h3>
+        <p class="section-subtitle">Visualisasi distribusi kontribusi skor kriteria terhadap nilai preferensi akhir masing-masing mobil</p>
+    </div>
+
+    <div class="alt-cards-grid" id="altCardsGrid">
+        <!-- Rendered by JavaScript -->
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (typeof loadAlternatifPage === "function") {
+            loadAlternatifPage();
+        }
+    });
+</script>
+{% endblock %}

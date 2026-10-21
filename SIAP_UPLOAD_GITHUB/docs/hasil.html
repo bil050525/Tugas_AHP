@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Dashboard Sistem Pendukung Keputusan (SPK) Pemilihan Mobil Terbaik menggunakan Metode Analytical Hierarchy Process (AHP)">
+    <title>Hasil & Rekomendasi - SPK Pemilihan Mobil AHP</title>
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons 6.5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Chart.js 4.4 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- App Container -->
+    <div class="app-layout">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="brand-logo">
+                    <div class="brand-icon">
+                        <i class="fa-solid fa-car-side"></i>
+                    </div>
+                    <div class="brand-text">
+                        <span class="brand-title">SPK Mobil</span>
+                        <span class="brand-badge">Metode AHP</span>
+                    </div>
+                </div>
+                <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Tutup Menu">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">MENU UTAMA</div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link ">
+                            <i class="fa-solid fa-chart-pie nav-icon"></i>
+                            <span class="nav-text">Dashboard Utama</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="alternatif.html" class="nav-link ">
+                            <i class="fa-solid fa-car nav-icon"></i>
+                            <span class="nav-text">Data Alternatif</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="kriteria.html" class="nav-link ">
+                            <i class="fa-solid fa-list-check nav-icon"></i>
+                            <span class="nav-text">Data Kriteria</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="perhitungan.html" class="nav-link ">
+                            <i class="fa-solid fa-calculator nav-icon"></i>
+                            <span class="nav-text">Proses Perhitungan</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="hasil.html" class="nav-link active">
+                            <i class="fa-solid fa-trophy nav-icon"></i>
+                            <span class="nav-text">Hasil & Rekomendasi</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="nav-section-title">AKSI CEPAT</div>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <button class="nav-action-btn" id="openUploadModalBtn">
+                            <i class="fa-solid fa-file-arrow-up nav-icon"></i>
+                            <span>Upload File Excel</span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-action-btn danger-hover" id="resetDataBtn">
+                            <i class="fa-solid fa-rotate-left nav-icon"></i>
+                            <span>Reset Data Excel Asli</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Sidebar Footer Status -->
+            <div class="sidebar-footer">
+                <div class="status-card">
+                    <div class="status-header">
+                        <span class="status-indicator-dot online"></span>
+                        <span class="status-title">Status Algoritma</span>
+                    </div>
+                    <p class="status-desc">AHP Engine Aktif & Valid</p>
+                    <div class="status-meta">
+                        <span>CR Threshold: <strong>≤ 0.10</strong></span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Sidebar Overlay (Mobile) -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+        <!-- Main Content Area -->
+        <div class="main-wrapper">
+            
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Buka Menu">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div class="page-title-box">
+                        <h1 class="page-title">Hasil & Rekomendasi Pemilihan Mobil</h1>
+                        <p class="page-subtitle">Peringkat Preferensi Global, Keputusan Terbaik, dan Verifikasi Konsistensi AHP</p>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <!-- Active Source Badge -->
+                    <div class="source-badge" title="Sumber file data Excel yang sedang aktif">
+                        <i class="fa-solid fa-file-excel"></i>
+                        <span id="headerSourceText">AHP_Studi_Kasus_Mobil.xlsx</span>
+                    </div>
+
+                    <!-- Export Dropdown -->
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-btn" id="exportDropdownBtn">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Ekspor Data</span>
+                            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                        </button>
+                        <div class="dropdown-menu" id="exportDropdownMenu">
+                            <a href="data/AHP_Studi_Kasus_Mobil.xlsx" class="dropdown-item" download>
+                                <i class="fa-solid fa-file-excel text-success"></i>
+                                <div>
+                                    <strong>Unduh Excel (.xlsx)</strong>
+                                    <small>Laporan lengkap berformat spreadsheet</small>
+                                </div>
+                            </a>
+                            <a href="data/AHP_Studi_Kasus_Mobil.xlsx" class="dropdown-item" download>
+                                <i class="fa-solid fa-file-csv text-primary"></i>
+                                <div>
+                                    <strong>Unduh CSV (.csv)</strong>
+                                    <small>Data teks tabel terpisah koma</small>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Quick Upload Button -->
+                    <button class="btn btn-primary" id="headerUploadBtn">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span>Upload Excel</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Page Body Content -->
+            <main class="content-container">
+                
+<div class="hasil-page">
+
+    <!-- Winner Announcement Hero Card -->
+    <div class="winner-hero-card" id="winnerHeroCard">
+        <div class="winner-badge-ribbon">
+            <i class="fa-solid fa-award"></i> REKOMENDASI TERBAIK AHP
+        </div>
+        <div class="winner-inner-grid">
+            <div class="winner-left">
+                <div class="winner-crown-icon">
+                    <i class="fa-solid fa-crown"></i>
+                </div>
+                <span class="winner-rank-label">PERINGKAT 1</span>
+                <h2 class="winner-car-title" id="winnerCarTitle">Suzuki Ertiga</h2>
+                <div class="winner-score-pill">
+                    <span>Skor Preferensi Global:</span>
+                    <strong id="winnerScorePill">0.481403 (48.14%)</strong>
+                </div>
+            </div>
+            <div class="winner-right">
+                <h4 class="winner-reason-title"><i class="fa-solid fa-circle-check text-success"></i> Mengapa Mobil Ini Terpilih?</h4>
+                <p class="winner-reason-text" id="winnerReasonText">
+                    Mobil ini berhasil menduduki peringkat pertama karena meraih nilai tertinggi pada kriteria dengan bobot paling dominan, yaitu <strong>Keandalan (Bobot 55,71%)</strong> dengan skor lokal <strong>0,5256</strong>, serta performa sangat baik pada kriteria <strong>Style (Bobot 32,02%)</strong> dengan skor lokal <strong>0,4365</strong>.
+                </p>
+                <div class="winner-specs-badges">
+                    <span class="spec-tag"><i class="fa-solid fa-shield"></i> Unggul Keandalan</span>
+                    <span class="spec-tag"><i class="fa-solid fa-palette"></i> Desain Modern</span>
+                    <span class="spec-tag"><i class="fa-solid fa-gauge-high"></i> BBM Teruji</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Section: Final Scores & Criteria Breakdown -->
+    <div class="charts-grid-2" style="margin-top: 24px;">
+        
+        <!-- Chart 1: Bar Chart Peringkat Skor Akhir -->
+        <div class="card chart-card">
+            <div class="card-header">
+                <div class="card-title-box">
+                    <i class="fa-solid fa-chart-column text-primary card-header-icon"></i>
+                    <div>
+                        <h3 class="card-title">Perbandingan Skor Akhir Seluruh Mobil</h3>
+                        <p class="card-subtitle">Akumulasi bobot preferensi AHP (Baris 96-100 Excel)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chart-container" style="height: 320px; position: relative;">
+                    <canvas id="chartFinalScores"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart 2: Stacked Bar Chart Kontribusi Kriteria -->
+        <div class="card chart-card">
+            <div class="card-header">
+                <div class="card-title-box">
+                    <i class="fa-solid fa-layer-group text-indigo card-header-icon"></i>
+                    <div>
+                        <h3 class="card-title">Komposisi Kontribusi per Kriteria</h3>
+                        <p class="card-subtitle">Rincian sumbangan Style, Keandalan, dan BBM pada total skor</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="chart-container" style="height: 320px; position: relative;">
+                    <canvas id="chartStackedScores"></canvas>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Tabel Peringkat Lengkap -->
+    <div class="card" style="margin-top: 24px;">
+        <div class="card-header">
+            <div class="card-title-box">
+                <i class="fa-solid fa-ranking-star text-warning card-header-icon"></i>
+                <div>
+                    <h3 class="card-title">Tabel Peringkat Lengkap & Pembagian Skor</h3>
+                    <p class="card-subtitle">Rangkuman hasil sintesis perkalian vektor bobot kriteria dengan bobot alternatif</p>
+                </div>
+            </div>
+            <div class="card-tools">
+                <a href="data/AHP_Studi_Kasus_Mobil.xlsx" class="btn btn-outline btn-sm" download>
+                    <i class="fa-solid fa-file-excel text-success"></i> Unduh Excel
+                </a>
+                <a href="data/AHP_Studi_Kasus_Mobil.xlsx" class="btn btn-outline btn-sm" download>
+                    <i class="fa-solid fa-file-csv text-primary"></i> Unduh CSV
+                </a>
+            </div>
+        </div>
+        <div class="card-body table-responsive">
+            <table class="data-table" id="rankingTable">
+                <thead>
+                    <tr>
+                        <th style="width: 100px;">Peringkat</th>
+                        <th>Nama Alternatif</th>
+                        <th class="text-center">Kontribusi Style</th>
+                        <th class="text-center">Kontribusi Keandalan</th>
+                        <th class="text-center">Kontribusi BBM</th>
+                        <th class="text-right">Skor Akhir (AHP)</th>
+                        <th class="text-center">Persentase</th>
+                        <th class="text-center">Status Rekomendasi</th>
+                    </tr>
+                </thead>
+                <tbody id="rankingTableBody">
+                    <tr><td colspan="8" class="text-center py-4"><i class="fa-solid fa-spinner fa-spin"></i> Memuat hasil peringkat...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Ringkasan Uji Konsistensi (CR) Semua Matriks -->
+    <div class="card" style="margin-top: 24px;">
+        <div class="card-header">
+            <div class="card-title-box">
+                <i class="fa-solid fa-shield-halved text-success card-header-icon"></i>
+                <div>
+                    <h3 class="card-title">Ringkasan Uji Konsistensi Logis Seluruh Matriks AHP</h3>
+                    <p class="card-subtitle">Pengujian parameter Saaty pada Matriks Kriteria dan 3 Matriks Alternatif (Baris 105-110 Excel)</p>
+                </div>
+            </div>
+            <div class="card-tools">
+                <span class="badge-status badge-success" id="overallConsistencyBadge">
+                    <i class="fa-solid fa-circle-check"></i> Seluruh Matriks Konsisten
+                </span>
+            </div>
+        </div>
+        <div class="card-body table-responsive">
+            <table class="data-table consistency-table" id="consistencyTable">
+                <thead>
+                    <tr>
+                        <th>Nama Matriks</th>
+                        <th class="text-center">Ukuran (n)</th>
+                        <th class="text-center">Lambda Max (&lambda; max)</th>
+                        <th class="text-center">Consistency Index (CI)</th>
+                        <th class="text-center">Random Index (RI)</th>
+                        <th class="text-center">Consistency Ratio (CR)</th>
+                        <th class="text-center">Batas Ambang</th>
+                        <th class="text-center">Status Konsistensi</th>
+                    </tr>
+                </thead>
+                <tbody id="consistencyTableBody">
+                    <tr><td colspan="8" class="text-center py-4"><i class="fa-solid fa-spinner fa-spin"></i> Memuat uji konsistensi...</td></tr>
+                </tbody>
+            </table>
+
+            <div class="consistency-footer-note">
+                <div class="note-item">
+                    <i class="fa-solid fa-circle-info text-primary"></i>
+                    <span><strong>Ketentuan Konsistensi Saaty:</strong> Matriks perbandingan berpasangan diterima jika <code>CR &le; 0,10 (10%)</code>. Jika <code>CR &gt; 0,10</code>, pengambil keputusan disarankan meninjau ulang pertimbangan perbandingan karena dinilai mengandung inkonsistensi logis.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+            </main>
+
+            <!-- Footer -->
+            <footer class="app-footer">
+                <div class="footer-left">
+                    <span>&copy; 2026 <strong>SPK Pemilihan Mobil</strong> &mdash; Implementasi Algoritma Analytical Hierarchy Process (AHP)</span>
+                </div>
+                <div class="footer-right">
+                    <span class="badge-tech"><i class="fa-brands fa-python"></i> Python Flask</span>
+                    <span class="badge-tech"><i class="fa-solid fa-chart-line"></i> Chart.js</span>
+                    <span class="badge-tech"><i class="fa-solid fa-file-excel"></i> OpenPyXL & Pandas</span>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Modal Upload File Excel -->
+    <div class="modal" id="uploadModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title-box">
+                        <div class="modal-icon-badge">
+                            <i class="fa-solid fa-file-excel"></i>
+                        </div>
+                        <div>
+                            <h3 class="modal-title">Unggah File Excel Studi Kasus</h3>
+                            <p class="modal-subtitle">Gunakan format file .xlsx atau .xls dengan matriks AHP</p>
+                        </div>
+                    </div>
+                    <button class="modal-close-btn" id="closeUploadModalBtn">&times;</button>
+                </div>
+                
+                <form id="uploadExcelForm" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <!-- Drag & Drop Zone -->
+                        <div class="drop-zone" id="dropZone">
+                            <i class="fa-solid fa-cloud-arrow-up drop-icon"></i>
+                            <h4 class="drop-text">Tarik & lepas file Excel di sini</h4>
+                            <p class="drop-subtext">atau klik tombol di bawah untuk memilih file</p>
+                            <label for="excelFileInput" class="btn btn-outline btn-sm">
+                                <i class="fa-solid fa-folder-open"></i> Pilih File
+                            </label>
+                            <input type="file" id="excelFileInput" name="file" accept=".xlsx, .xls" class="file-input-hidden">
+                            <div class="file-info-preview" id="fileInfoPreview" style="display: none;">
+                                <i class="fa-solid fa-file-circle-check text-success"></i>
+                                <span id="selectedFileName">Nama_file.xlsx</span>
+                                <button type="button" class="btn-remove-file" id="btnRemoveFile">&times;</button>
+                            </div>
+                        </div>
+
+                        <!-- Instructions alert -->
+                        <div class="info-alert">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <div>
+                                <strong>Struktur File Excel:</strong>
+                                <span>File harus memuat sheet perbandingan kriteria dan alternatif (sama seperti struktur <code>AHP_Studi_Kasus_Mobil.xlsx</code>). Sistem akan otomatis memvalidasi bujur sangkar matriks dan menghitung konsistensi.</span>
+                            </div>
+                        </div>
+
+                        <div id="uploadAlert" class="alert-box" style="display: none;"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelUploadBtn">Batal</button>
+                        <button type="submit" class="btn btn-primary" id="submitUploadBtn">
+                            <i class="fa-solid fa-calculator"></i>
+                            <span>Proses & Hitung Ulang AHP</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Main JavaScript -->
+    <script src="js/script.js"></script>
+    
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (typeof loadHasilPage === "function") {
+            loadHasilPage();
+        }
+    });
+</script>
+
+</body>
+</html>

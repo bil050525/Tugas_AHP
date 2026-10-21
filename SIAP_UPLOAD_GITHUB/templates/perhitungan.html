@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+
+{% block title %}Proses Perhitungan AHP - SPK Pemilihan Mobil{% endblock %}
+{% block page_title %}Detail Perhitungan Matematis AHP{% endblock %}
+{% block page_subtitle %}Transparansi 12 Tahapan Perhitungan Algoritma Analytical Hierarchy Process{% endblock %}
+
+{% block content %}
+<div class="perhitungan-page">
+
+    <!-- Formula Reference Banner -->
+    <div class="card math-banner-card">
+        <div class="card-body">
+            <div class="math-banner-header">
+                <i class="fa-solid fa-graduation-cap math-icon"></i>
+                <div>
+                    <h3 class="math-title">Panduan Rumus Matematis AHP (Thomas L. Saaty)</h3>
+                    <p class="math-subtitle">Semua perhitungan dihitung otomatis oleh Python backend menggunakan pustaka NumPy dan Pandas</p>
+                </div>
+            </div>
+            
+            <div class="math-formulas-grid">
+                <div class="formula-box">
+                    <span class="formula-tag">Tahap 1 & 2: Normalisasi Matriks</span>
+                    <div class="formula-latex">r<sub>ij</sub> = a<sub>ij</sub> / &Sigma;<sub>k=1..n</sub> a<sub>kj</sub></div>
+                    <p class="formula-desc">Setiap elemen dibagi dengan jumlah nilai pada kolom yang sama.</p>
+                </div>
+                <div class="formula-box">
+                    <span class="formula-tag">Tahap 3 & 4: Bobot Prioritas (w)</span>
+                    <div class="formula-latex">w<sub>i</sub> = (1/n) &Sigma;<sub>j=1..n</sub> r<sub>ij</sub></div>
+                    <p class="formula-desc">Rata-rata baris dari matriks yang telah dinormalisasi.</p>
+                </div>
+                <div class="formula-box">
+                    <span class="formula-tag">Tahap 5 & 6: Lambda Max (&lambda; max)</span>
+                    <div class="formula-latex">&lambda;<sub>max</sub> = &Sigma;<sub>j=1..n</sub> (Total_Kolom<sub>j</sub> &times; w<sub>j</sub>)</div>
+                    <p class="formula-desc">Jumlah perkalian total setiap kolom dengan bobot prioritas barisnya.</p>
+                </div>
+                <div class="formula-box">
+                    <span class="formula-tag">Tahap 7 - 10: Rasio Konsistensi (CR)</span>
+                    <div class="formula-latex">CI = (&lambda;<sub>max</sub> - n) / (n - 1) &nbsp;|&nbsp; CR = CI / RI</div>
+                    <p class="formula-desc">Matriks dinyatakan <strong>KONSISTEN</strong> jika nilai <strong>CR &le; 0,10</strong>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step Navigator Tabs -->
+    <div class="steps-nav-container">
+        <ul class="steps-nav" id="stepsNav">
+            <li class="step-nav-item">
+                <button class="step-nav-btn active" data-step="kriteria">
+                    <span class="step-number">1</span>
+                    <span class="step-title-text">Kriteria Penilaian</span>
+                </button>
+            </li>
+            <li class="step-nav-item">
+                <button class="step-nav-btn" data-step="style">
+                    <span class="step-number">2</span>
+                    <span class="step-title-text">Alternatif &mdash; Style</span>
+                </button>
+            </li>
+            <li class="step-nav-item">
+                <button class="step-nav-btn" data-step="keandalan">
+                    <span class="step-number">3</span>
+                    <span class="step-title-text">Alternatif &mdash; Keandalan</span>
+                </button>
+            </li>
+            <li class="step-nav-item">
+                <button class="step-nav-btn" data-step="bbm">
+                    <span class="step-number">4</span>
+                    <span class="step-title-text">Alternatif &mdash; BBM</span>
+                </button>
+            </li>
+            <li class="step-nav-item">
+                <button class="step-nav-btn" data-step="sintesis">
+                    <span class="step-number">5</span>
+                    <span class="step-title-text">Sintesis Skor Akhir</span>
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Step Content Containers -->
+
+    <!-- TAB 1: Kriteria -->
+    <div class="step-content-pane active" id="pane-kriteria">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title-box">
+                    <i class="fa-solid fa-list-ol text-primary card-header-icon"></i>
+                    <div>
+                        <h3 class="card-title">Langkah 1: Matriks Perbandingan Berpasangan Kriteria (3x3)</h3>
+                        <p class="card-subtitle">Perbandingan antara Style (S), Keandalan (K), dan Konsumsi Bahan Bakar (B)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="stepCriteriaContent">
+                    <p class="text-center py-4"><i class="fa-solid fa-spinner fa-spin"></i> Memuat data matriks kriteria...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 2: Style -->
+    <div class="step-content-pane" id="pane-style">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title-box">
+                    <i class="fa-solid fa-wand-magic-sparkles text-indigo card-header-icon"></i>
+                    <div>
+                        <h3 class="card-title">Langkah 2: Perbandingan Alternatif terhadap Kriteria Style (4x4)</h3>
+                        <p class="card-subtitle">Penilaian preferensi desain, estetika interior/eksterior antar Avanza, Xenia, Ertiga, Livina (Baris 31-46 Excel)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="stepStyleContent">
+                    <p class="text-center py-4"><i class="fa-solid fa-spinner fa-spin"></i> Memuat data matriks style...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 3: Keandalan -->
+    <div class="step-content-pane" id="pane-keandalan">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title-box">
+                    <i class="fa-solid fa-shield-heart text-success card-header-icon"></i>
+                    <div>
+                        <h3 class="card-title">Langkah 3: Perbandingan Alternatif terhadap Kriteria Keandalan (4x4)</h3>
+                        <p class="card-subtitle">Penilaian durabilitas mesin, ketangguhan suspensi, dan reliabilitas jangka panjang (Baris 48-63 Excel)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="stepKeandalanContent">
+                    <p class="text-center py-4"><i class="fa-solid fa-spinner fa-spin"></i> Memuat data matriks keandalan...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 4: Konsumsi BBM -->
+    <div class="step-content-pane" id="pane-bbm">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title-box">
+                    <i class="fa-solid fa-gas-pump text-warning card-header-icon"></i>
+                    <div>
+                        <h3 class="card-title">Langkah 4: Perbandingan Alternatif terhadap Kriteria Konsumsi BBM (4x4)</h3>
+                        <p class="card-subtitle">Penilaian efisiensi pemakaian bahan bakar pada rute perkotaan dan tol (Baris 65-80 Excel)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="stepBbmContent">
+                    <p class="text-center py-4"><i class="fa-solid fa-spinner fa-spin"></i> Memuat data matriks BBM...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TAB 5: Sintesis Akhir -->
+    <div class="step-content-pane" id="pane-sintesis">
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title-box">
+                    <i class="fa-solid fa-trophy text-primary card-header-icon"></i>
+                    <div>
+                        <h3 class="card-title">Langkah 5 & 6: Matriks Sintesis Akhir & Penentuan Peringkat</h3>
+                        <p class="card-subtitle">Perkalian Bobot Kriteria &times; Bobot Alternatif untuk menghasilkan Skor Akhir (Baris 82-102 Excel)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="stepSintesisContent">
+                    <p class="text-center py-4"><i class="fa-solid fa-spinner fa-spin"></i> Memuat sintesis data...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (typeof loadPerhitunganPage === "function") {
+            loadPerhitunganPage();
+        }
+    });
+</script>
+{% endblock %}

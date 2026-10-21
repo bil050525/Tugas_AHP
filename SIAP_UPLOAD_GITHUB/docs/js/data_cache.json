@@ -1,0 +1,1145 @@
+{
+  "dashboard": {
+    "all_consistent": true,
+    "best_car": {
+      "name": "Ertiga",
+      "rank": 1,
+      "score": 0.4814,
+      "score_percent": 48.14
+    },
+    "chart_criteria": {
+      "labels": [
+        "Style (Gaya/Tampilan)",
+        "Keandalan (Reliability/Durabilitas)",
+        "Konsumsi Bahan Bakar (Efisiensi BBM)"
+      ],
+      "percentages": [
+        32.02,
+        55.71,
+        12.26
+      ],
+      "short_labels": [
+        "S",
+        "K",
+        "B"
+      ],
+      "weights": [
+        0.3202,
+        0.5571,
+        0.1226
+      ]
+    },
+    "chart_ranking": {
+      "labels": [
+        "Ertiga",
+        "Grand Livina",
+        "Avanza",
+        "Xenia"
+      ],
+      "percentages": [
+        48.14,
+        27.53,
+        14.8,
+        9.52
+      ],
+      "ranks": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "scores": [
+        0.4814,
+        0.2753,
+        0.148,
+        0.0952
+      ]
+    },
+    "consistency_summary": [
+      {
+        "ci": 0.011706349206349165,
+        "cr": 0.02018336070060201,
+        "is_consistent": true,
+        "lambda_max": 3.0234126984126983,
+        "matrix_name": "Kriteria (Style, Keandalan, BBM)",
+        "ri": 0.58,
+        "status": "Konsisten"
+      },
+      {
+        "ci": 0.06338672208013622,
+        "cr": 0.07042969120015136,
+        "is_consistent": true,
+        "lambda_max": 4.190160166240409,
+        "matrix_name": "Alternatif terhadap Kriteria Style (Gaya/Tampilan)",
+        "ri": 0.9,
+        "status": "Konsisten"
+      },
+      {
+        "ci": 0.05702717457699613,
+        "cr": 0.06336352730777348,
+        "is_consistent": true,
+        "lambda_max": 4.171081523730988,
+        "matrix_name": "Alternatif terhadap Kriteria Keandalan (Reliability/Durabilitas)",
+        "ri": 0.9,
+        "status": "Konsisten"
+      },
+      {
+        "ci": 0.03975893997445704,
+        "cr": 0.044176599971618935,
+        "is_consistent": true,
+        "lambda_max": 4.119276819923371,
+        "matrix_name": "Alternatif terhadap Kriteria Konsumsi Bahan Bakar (Efisiensi BBM)",
+        "ri": 0.9,
+        "status": "Konsisten"
+      }
+    ],
+    "data_source": "AHP_Studi_Kasus_Mobil.xlsx",
+    "status": "success",
+    "total_alternatives": 4,
+    "total_criteria": 3
+  },
+  "alternatif": {
+    "alternatives": [
+      {
+        "breakdown": {
+          "Keandalan (Reliability/Durabilitas)": {
+            "contribution_percent": 60.83358362160758,
+            "criteria_weight": 0.557142857142857,
+            "local_weight": 0.5256370050144101,
+            "weighted_score": 0.29285490279374277
+          },
+          "Konsumsi Bahan Bakar (Efisiensi BBM)": {
+            "contribution_percent": 10.12991232670609,
+            "criteria_weight": 0.12261904761904761,
+            "local_weight": 0.3977011494252874,
+            "weighted_score": 0.048765736179529284
+          },
+          "Style (Gaya/Tampilan)": {
+            "contribution_percent": 29.03650405168634,
+            "criteria_weight": 0.3202380952380952,
+            "local_weight": 0.4364961636828645,
+            "weighted_score": 0.13978270003653634
+          }
+        },
+        "final_score": 0.48140333900980836,
+        "final_score_percent": 48.140333900980835,
+        "name": "Ertiga",
+        "rank": 1,
+        "raw_weights": {
+          "Keandalan (Reliability/Durabilitas)": 0.5256370050144101,
+          "Konsumsi Bahan Bakar (Efisiensi BBM)": 0.3977011494252874,
+          "Style (Gaya/Tampilan)": 0.4364961636828645
+        }
+      },
+      {
+        "breakdown": {
+          "Keandalan (Reliability/Durabilitas)": {
+            "contribution_percent": 55.207185653844014,
+            "criteria_weight": 0.557142857142857,
+            "local_weight": 0.2728430539590518,
+            "weighted_score": 0.15201255863432883
+          },
+          "Konsumsi Bahan Bakar (Efisiensi BBM)": {
+            "contribution_percent": 3.5894482764180697,
+            "criteria_weight": 0.12261904761904761,
+            "local_weight": 0.08060344827586208,
+            "weighted_score": 0.009883518062397373
+          },
+          "Style (Gaya/Tampilan)": {
+            "contribution_percent": 41.2033660697379,
+            "criteria_weight": 0.3202380952380952,
+            "local_weight": 0.3542774936061381,
+            "weighted_score": 0.11345314973815611
+          }
+        },
+        "final_score": 0.27534922643488235,
+        "final_score_percent": 27.534922643488237,
+        "name": "Grand Livina",
+        "rank": 2,
+        "raw_weights": {
+          "Keandalan (Reliability/Durabilitas)": 0.2728430539590518,
+          "Konsumsi Bahan Bakar (Efisiensi BBM)": 0.08060344827586208,
+          "Style (Gaya/Tampilan)": 0.3542774936061381
+        }
+      },
+      {
+        "breakdown": {
+          "Keandalan (Reliability/Durabilitas)": {
+            "contribution_percent": 46.77940298105584,
+            "criteria_weight": 0.557142857142857,
+            "local_weight": 0.12430697852632983,
+            "weighted_score": 0.06925674517895518
+          },
+          "Konsumsi Bahan Bakar (Efisiensi BBM)": {
+            "contribution_percent": 25.275270309395587,
+            "criteria_weight": 0.12261904761904761,
+            "local_weight": 0.30517241379310345,
+            "weighted_score": 0.037419950738916255
+          },
+          "Style (Gaya/Tampilan)": {
+            "contribution_percent": 27.945326709548574,
+            "criteria_weight": 0.3202380952380952,
+            "local_weight": 0.12919437340153453,
+            "weighted_score": 0.04137296005358665
+          }
+        },
+        "final_score": 0.14804965597145808,
+        "final_score_percent": 14.804965597145808,
+        "name": "Avanza",
+        "rank": 3,
+        "raw_weights": {
+          "Keandalan (Reliability/Durabilitas)": 0.12430697852632983,
+          "Konsumsi Bahan Bakar (Efisiensi BBM)": 0.30517241379310345,
+          "Style (Gaya/Tampilan)": 0.12919437340153453
+        }
+      },
+      {
+        "breakdown": {
+          "Keandalan (Reliability/Durabilitas)": {
+            "contribution_percent": 45.188712568475594,
+            "criteria_weight": 0.557142857142857,
+            "local_weight": 0.07721296250020825,
+            "weighted_score": 0.0430186505358303
+          },
+          "Konsumsi Bahan Bakar (Efisiensi BBM)": {
+            "contribution_percent": 27.88914093706436,
+            "criteria_weight": 0.12261904761904761,
+            "local_weight": 0.21652298850574714,
+            "weighted_score": 0.02654984263820471
+          },
+          "Style (Gaya/Tampilan)": {
+            "contribution_percent": 26.922146494460037,
+            "criteria_weight": 0.3202380952380952,
+            "local_weight": 0.08003196930946292,
+            "weighted_score": 0.0256292854098161
+          }
+        },
+        "final_score": 0.09519777858385112,
+        "final_score_percent": 9.519777858385112,
+        "name": "Xenia",
+        "rank": 4,
+        "raw_weights": {
+          "Keandalan (Reliability/Durabilitas)": 0.07721296250020825,
+          "Konsumsi Bahan Bakar (Efisiensi BBM)": 0.21652298850574714,
+          "Style (Gaya/Tampilan)": 0.08003196930946292
+        }
+      }
+    ],
+    "criteria_labels": [
+      "Style (Gaya/Tampilan)",
+      "Keandalan (Reliability/Durabilitas)",
+      "Konsumsi Bahan Bakar (Efisiensi BBM)"
+    ],
+    "data_source": "AHP_Studi_Kasus_Mobil.xlsx",
+    "status": "success",
+    "total": 4
+  },
+  "kriteria": {
+    "calculation": {
+      "ci": 0.011706349206349165,
+      "col_sums": [
+        3.3333333333333335,
+        1.75,
+        8.0
+      ],
+      "cr": 0.02018336070060201,
+      "cr_percent": 2.0183360700602013,
+      "eigen_contributions": [
+        1.0674603174603174,
+        0.9749999999999999,
+        0.9809523809523809
+      ],
+      "is_consistent": true,
+      "labels": [
+        "Style (Gaya/Tampilan)",
+        "Keandalan (Reliability/Durabilitas)",
+        "Konsumsi Bahan Bakar (Efisiensi BBM)"
+      ],
+      "lambda_max": 3.0234126984126983,
+      "normalized_matrix": [
+        [
+          0.3,
+          0.2857142857142857,
+          0.375
+        ],
+        [
+          0.6,
+          0.5714285714285714,
+          0.5
+        ],
+        [
+          0.09999999999999999,
+          0.14285714285714285,
+          0.125
+        ]
+      ],
+      "raw_matrix": [
+        [
+          1.0,
+          0.5,
+          3.0
+        ],
+        [
+          2.0,
+          1.0,
+          4.0
+        ],
+        [
+          0.3333333333333333,
+          0.25,
+          1.0
+        ]
+      ],
+      "ri": 0.58,
+      "row_sums": [
+        0.9607142857142856,
+        1.6714285714285713,
+        0.3678571428571428
+      ],
+      "size": 3,
+      "status": "Konsisten",
+      "threshold": 0.1,
+      "title": "Matriks Perbandingan Berpasangan Kriteria",
+      "weights": [
+        0.3202380952380952,
+        0.557142857142857,
+        0.12261904761904761
+      ],
+      "weights_percent": [
+        32.02380952380952,
+        55.71428571428571,
+        12.261904761904761
+      ]
+    },
+    "criteria_keys": [
+      "S",
+      "K",
+      "B"
+    ],
+    "criteria_labels": [
+      "Style (Gaya/Tampilan)",
+      "Keandalan (Reliability/Durabilitas)",
+      "Konsumsi Bahan Bakar (Efisiensi BBM)"
+    ],
+    "data_source": "AHP_Studi_Kasus_Mobil.xlsx",
+    "status": "success"
+  },
+  "perhitungan": {
+    "alternatives": [
+      "Avanza",
+      "Xenia",
+      "Ertiga",
+      "Grand Livina"
+    ],
+    "consistency_summary": [
+      {
+        "ci": 0.011706349206349165,
+        "cr": 0.02018336070060201,
+        "is_consistent": true,
+        "lambda_max": 3.0234126984126983,
+        "matrix_name": "Kriteria (Style, Keandalan, BBM)",
+        "ri": 0.58,
+        "status": "Konsisten"
+      },
+      {
+        "ci": 0.06338672208013622,
+        "cr": 0.07042969120015136,
+        "is_consistent": true,
+        "lambda_max": 4.190160166240409,
+        "matrix_name": "Alternatif terhadap Kriteria Style (Gaya/Tampilan)",
+        "ri": 0.9,
+        "status": "Konsisten"
+      },
+      {
+        "ci": 0.05702717457699613,
+        "cr": 0.06336352730777348,
+        "is_consistent": true,
+        "lambda_max": 4.171081523730988,
+        "matrix_name": "Alternatif terhadap Kriteria Keandalan (Reliability/Durabilitas)",
+        "ri": 0.9,
+        "status": "Konsisten"
+      },
+      {
+        "ci": 0.03975893997445704,
+        "cr": 0.044176599971618935,
+        "is_consistent": true,
+        "lambda_max": 4.119276819923371,
+        "matrix_name": "Alternatif terhadap Kriteria Konsumsi Bahan Bakar (Efisiensi BBM)",
+        "ri": 0.9,
+        "status": "Konsisten"
+      }
+    ],
+    "criteria_keys": [
+      "S",
+      "K",
+      "B"
+    ],
+    "criteria_labels": [
+      "Style (Gaya/Tampilan)",
+      "Keandalan (Reliability/Durabilitas)",
+      "Konsumsi Bahan Bakar (Efisiensi BBM)"
+    ],
+    "data_source": "AHP_Studi_Kasus_Mobil.xlsx",
+    "status": "success",
+    "step1_criteria": {
+      "ci": 0.011706349206349165,
+      "col_sums": [
+        3.3333333333333335,
+        1.75,
+        8.0
+      ],
+      "cr": 0.02018336070060201,
+      "cr_percent": 2.0183360700602013,
+      "eigen_contributions": [
+        1.0674603174603174,
+        0.9749999999999999,
+        0.9809523809523809
+      ],
+      "is_consistent": true,
+      "labels": [
+        "Style (Gaya/Tampilan)",
+        "Keandalan (Reliability/Durabilitas)",
+        "Konsumsi Bahan Bakar (Efisiensi BBM)"
+      ],
+      "lambda_max": 3.0234126984126983,
+      "normalized_matrix": [
+        [
+          0.3,
+          0.2857142857142857,
+          0.375
+        ],
+        [
+          0.6,
+          0.5714285714285714,
+          0.5
+        ],
+        [
+          0.09999999999999999,
+          0.14285714285714285,
+          0.125
+        ]
+      ],
+      "raw_matrix": [
+        [
+          1.0,
+          0.5,
+          3.0
+        ],
+        [
+          2.0,
+          1.0,
+          4.0
+        ],
+        [
+          0.3333333333333333,
+          0.25,
+          1.0
+        ]
+      ],
+      "ri": 0.58,
+      "row_sums": [
+        0.9607142857142856,
+        1.6714285714285713,
+        0.3678571428571428
+      ],
+      "size": 3,
+      "status": "Konsisten",
+      "threshold": 0.1,
+      "title": "Matriks Perbandingan Berpasangan Kriteria",
+      "weights": [
+        0.3202380952380952,
+        0.557142857142857,
+        0.12261904761904761
+      ],
+      "weights_percent": [
+        32.02380952380952,
+        55.71428571428571,
+        12.261904761904761
+      ]
+    },
+    "step2_alternatives": {
+      "B": {
+        "ci": 0.03975893997445704,
+        "col_sums": [
+          3.75,
+          4.833333333333333,
+          2.4166666666666665,
+          12.0
+        ],
+        "cr": 0.044176599971618935,
+        "cr_percent": 4.417659997161893,
+        "eigen_contributions": [
+          1.144396551724138,
+          1.0465277777777777,
+          0.9611111111111111,
+          0.9672413793103449
+        ],
+        "is_consistent": true,
+        "labels": [
+          "Avanza",
+          "Xenia",
+          "Ertiga",
+          "Grand Livina"
+        ],
+        "lambda_max": 4.119276819923371,
+        "normalized_matrix": [
+          [
+            0.26666666666666666,
+            0.4137931034482759,
+            0.20689655172413796,
+            0.3333333333333333
+          ],
+          [
+            0.13333333333333333,
+            0.20689655172413796,
+            0.27586206896551724,
+            0.25
+          ],
+          [
+            0.5333333333333333,
+            0.3103448275862069,
+            0.4137931034482759,
+            0.3333333333333333
+          ],
+          [
+            0.06666666666666667,
+            0.06896551724137931,
+            0.10344827586206898,
+            0.08333333333333333
+          ]
+        ],
+        "raw_matrix": [
+          [
+            1.0,
+            2.0,
+            0.5,
+            4.0
+          ],
+          [
+            0.5,
+            1.0,
+            0.6666666666666666,
+            3.0
+          ],
+          [
+            2.0,
+            1.5,
+            1.0,
+            4.0
+          ],
+          [
+            0.25,
+            0.3333333333333333,
+            0.25,
+            1.0
+          ]
+        ],
+        "ri": 0.9,
+        "row_sums": [
+          1.2206896551724138,
+          0.8660919540229886,
+          1.5908045977011496,
+          0.3224137931034483
+        ],
+        "size": 4,
+        "status": "Konsisten",
+        "threshold": 0.1,
+        "title": "Matriks Perbandingan Alternatif - Kriteria Konsumsi Bahan Bakar (Efisiensi BBM)",
+        "weights": [
+          0.30517241379310345,
+          0.21652298850574714,
+          0.3977011494252874,
+          0.08060344827586208
+        ],
+        "weights_percent": [
+          30.517241379310345,
+          21.652298850574713,
+          39.77011494252874,
+          8.060344827586208
+        ]
+      },
+      "K": {
+        "ci": 0.05702717457699613,
+        "col_sums": [
+          8.5,
+          12.0,
+          1.7833333333333332,
+          4.583333333333333
+        ],
+        "cr": 0.06336352730777348,
+        "cr_percent": 6.336352730777348,
+        "eigen_contributions": [
+          1.0566093174738036,
+          0.9265555500024989,
+          0.937385992275698,
+          1.2505306639789873
+        ],
+        "is_consistent": true,
+        "labels": [
+          "Avanza",
+          "Xenia",
+          "Ertiga",
+          "Grand Livina"
+        ],
+        "lambda_max": 4.171081523730988,
+        "normalized_matrix": [
+          [
+            0.11764705882352941,
+            0.16666666666666666,
+            0.14018691588785048,
+            0.07272727272727272
+          ],
+          [
+            0.058823529411764705,
+            0.08333333333333333,
+            0.11214953271028039,
+            0.05454545454545455
+          ],
+          [
+            0.47058823529411764,
+            0.4166666666666667,
+            0.5607476635514019,
+            0.6545454545454545
+          ],
+          [
+            0.35294117647058826,
+            0.3333333333333333,
+            0.18691588785046728,
+            0.2181818181818182
+          ]
+        ],
+        "raw_matrix": [
+          [
+            1.0,
+            2.0,
+            0.25,
+            0.3333333333333333
+          ],
+          [
+            0.5,
+            1.0,
+            0.2,
+            0.25
+          ],
+          [
+            4.0,
+            5.0,
+            1.0,
+            3.0
+          ],
+          [
+            3.0,
+            4.0,
+            0.3333333333333333,
+            1.0
+          ]
+        ],
+        "ri": 0.9,
+        "row_sums": [
+          0.4972279141053193,
+          0.308851850000833,
+          2.1025480200576405,
+          1.0913722158362071
+        ],
+        "size": 4,
+        "status": "Konsisten",
+        "threshold": 0.1,
+        "title": "Matriks Perbandingan Alternatif - Kriteria Keandalan (Reliability/Durabilitas)",
+        "weights": [
+          0.12430697852632983,
+          0.07721296250020825,
+          0.5256370050144101,
+          0.2728430539590518
+        ],
+        "weights_percent": [
+          12.430697852632983,
+          7.721296250020824,
+          52.56370050144101,
+          27.28430539590518
+        ]
+      },
+      "S": {
+        "ci": 0.06338672208013622,
+        "col_sums": [
+          8.5,
+          12.0,
+          2.083333333333333,
+          3.45
+        ],
+        "cr": 0.07042969120015136,
+        "cr_percent": 7.042969120015136,
+        "eigen_contributions": [
+          1.0981521739130435,
+          0.960383631713555,
+          0.9093670076726342,
+          1.2222573529411764
+        ],
+        "is_consistent": true,
+        "labels": [
+          "Avanza",
+          "Xenia",
+          "Ertiga",
+          "Grand Livina"
+        ],
+        "lambda_max": 4.190160166240409,
+        "normalized_matrix": [
+          [
+            0.11764705882352941,
+            0.16666666666666666,
+            0.16,
+            0.07246376811594203
+          ],
+          [
+            0.058823529411764705,
+            0.08333333333333333,
+            0.12000000000000002,
+            0.057971014492753624
+          ],
+          [
+            0.35294117647058826,
+            0.3333333333333333,
+            0.4800000000000001,
+            0.5797101449275363
+          ],
+          [
+            0.47058823529411764,
+            0.4166666666666667,
+            0.24000000000000005,
+            0.2898550724637681
+          ]
+        ],
+        "raw_matrix": [
+          [
+            1.0,
+            2.0,
+            0.3333333333333333,
+            0.25
+          ],
+          [
+            0.5,
+            1.0,
+            0.25,
+            0.2
+          ],
+          [
+            3.0,
+            4.0,
+            1.0,
+            2.0
+          ],
+          [
+            4.0,
+            5.0,
+            0.5,
+            1.0
+          ]
+        ],
+        "ri": 0.9,
+        "row_sums": [
+          0.5167774936061381,
+          0.3201278772378517,
+          1.745984654731458,
+          1.4171099744245523
+        ],
+        "size": 4,
+        "status": "Konsisten",
+        "threshold": 0.1,
+        "title": "Matriks Perbandingan Alternatif - Kriteria Style (Gaya/Tampilan)",
+        "weights": [
+          0.12919437340153453,
+          0.08003196930946292,
+          0.4364961636828645,
+          0.3542774936061381
+        ],
+        "weights_percent": [
+          12.919437340153452,
+          8.003196930946292,
+          43.649616368286445,
+          35.42774936061381
+        ]
+      }
+    },
+    "step3_synthesis": {
+      "alt_weight_matrix": [
+        [
+          0.12919437340153453,
+          0.12430697852632983,
+          0.30517241379310345
+        ],
+        [
+          0.08003196930946292,
+          0.07721296250020825,
+          0.21652298850574714
+        ],
+        [
+          0.4364961636828645,
+          0.5256370050144101,
+          0.3977011494252874
+        ],
+        [
+          0.3542774936061381,
+          0.2728430539590518,
+          0.08060344827586208
+        ]
+      ],
+      "criteria_weights": {
+        "Keandalan (Reliability/Durabilitas)": 0.557142857142857,
+        "Konsumsi Bahan Bakar (Efisiensi BBM)": 0.12261904761904761,
+        "Style (Gaya/Tampilan)": 0.3202380952380952
+      },
+      "ranked_alternatives": [
+        {
+          "breakdown": {
+            "Keandalan (Reliability/Durabilitas)": {
+              "contribution_percent": 60.83358362160758,
+              "criteria_weight": 0.557142857142857,
+              "local_weight": 0.5256370050144101,
+              "weighted_score": 0.29285490279374277
+            },
+            "Konsumsi Bahan Bakar (Efisiensi BBM)": {
+              "contribution_percent": 10.12991232670609,
+              "criteria_weight": 0.12261904761904761,
+              "local_weight": 0.3977011494252874,
+              "weighted_score": 0.048765736179529284
+            },
+            "Style (Gaya/Tampilan)": {
+              "contribution_percent": 29.03650405168634,
+              "criteria_weight": 0.3202380952380952,
+              "local_weight": 0.4364961636828645,
+              "weighted_score": 0.13978270003653634
+            }
+          },
+          "final_score": 0.48140333900980836,
+          "final_score_percent": 48.140333900980835,
+          "name": "Ertiga",
+          "rank": 1,
+          "raw_weights": {
+            "Keandalan (Reliability/Durabilitas)": 0.5256370050144101,
+            "Konsumsi Bahan Bakar (Efisiensi BBM)": 0.3977011494252874,
+            "Style (Gaya/Tampilan)": 0.4364961636828645
+          }
+        },
+        {
+          "breakdown": {
+            "Keandalan (Reliability/Durabilitas)": {
+              "contribution_percent": 55.207185653844014,
+              "criteria_weight": 0.557142857142857,
+              "local_weight": 0.2728430539590518,
+              "weighted_score": 0.15201255863432883
+            },
+            "Konsumsi Bahan Bakar (Efisiensi BBM)": {
+              "contribution_percent": 3.5894482764180697,
+              "criteria_weight": 0.12261904761904761,
+              "local_weight": 0.08060344827586208,
+              "weighted_score": 0.009883518062397373
+            },
+            "Style (Gaya/Tampilan)": {
+              "contribution_percent": 41.2033660697379,
+              "criteria_weight": 0.3202380952380952,
+              "local_weight": 0.3542774936061381,
+              "weighted_score": 0.11345314973815611
+            }
+          },
+          "final_score": 0.27534922643488235,
+          "final_score_percent": 27.534922643488237,
+          "name": "Grand Livina",
+          "rank": 2,
+          "raw_weights": {
+            "Keandalan (Reliability/Durabilitas)": 0.2728430539590518,
+            "Konsumsi Bahan Bakar (Efisiensi BBM)": 0.08060344827586208,
+            "Style (Gaya/Tampilan)": 0.3542774936061381
+          }
+        },
+        {
+          "breakdown": {
+            "Keandalan (Reliability/Durabilitas)": {
+              "contribution_percent": 46.77940298105584,
+              "criteria_weight": 0.557142857142857,
+              "local_weight": 0.12430697852632983,
+              "weighted_score": 0.06925674517895518
+            },
+            "Konsumsi Bahan Bakar (Efisiensi BBM)": {
+              "contribution_percent": 25.275270309395587,
+              "criteria_weight": 0.12261904761904761,
+              "local_weight": 0.30517241379310345,
+              "weighted_score": 0.037419950738916255
+            },
+            "Style (Gaya/Tampilan)": {
+              "contribution_percent": 27.945326709548574,
+              "criteria_weight": 0.3202380952380952,
+              "local_weight": 0.12919437340153453,
+              "weighted_score": 0.04137296005358665
+            }
+          },
+          "final_score": 0.14804965597145808,
+          "final_score_percent": 14.804965597145808,
+          "name": "Avanza",
+          "rank": 3,
+          "raw_weights": {
+            "Keandalan (Reliability/Durabilitas)": 0.12430697852632983,
+            "Konsumsi Bahan Bakar (Efisiensi BBM)": 0.30517241379310345,
+            "Style (Gaya/Tampilan)": 0.12919437340153453
+          }
+        },
+        {
+          "breakdown": {
+            "Keandalan (Reliability/Durabilitas)": {
+              "contribution_percent": 45.188712568475594,
+              "criteria_weight": 0.557142857142857,
+              "local_weight": 0.07721296250020825,
+              "weighted_score": 0.0430186505358303
+            },
+            "Konsumsi Bahan Bakar (Efisiensi BBM)": {
+              "contribution_percent": 27.88914093706436,
+              "criteria_weight": 0.12261904761904761,
+              "local_weight": 0.21652298850574714,
+              "weighted_score": 0.02654984263820471
+            },
+            "Style (Gaya/Tampilan)": {
+              "contribution_percent": 26.922146494460037,
+              "criteria_weight": 0.3202380952380952,
+              "local_weight": 0.08003196930946292,
+              "weighted_score": 0.0256292854098161
+            }
+          },
+          "final_score": 0.09519777858385112,
+          "final_score_percent": 9.519777858385112,
+          "name": "Xenia",
+          "rank": 4,
+          "raw_weights": {
+            "Keandalan (Reliability/Durabilitas)": 0.07721296250020825,
+            "Konsumsi Bahan Bakar (Efisiensi BBM)": 0.21652298850574714,
+            "Style (Gaya/Tampilan)": 0.08003196930946292
+          }
+        }
+      ],
+      "weighted_matrix": [
+        [
+          0.04137296005358665,
+          0.06925674517895518,
+          0.037419950738916255
+        ],
+        [
+          0.0256292854098161,
+          0.0430186505358303,
+          0.02654984263820471
+        ],
+        [
+          0.13978270003653634,
+          0.29285490279374277,
+          0.048765736179529284
+        ],
+        [
+          0.11345314973815611,
+          0.15201255863432883,
+          0.009883518062397373
+        ]
+      ]
+    }
+  },
+  "hasil": {
+    "all_consistent": true,
+    "best_alternative": {
+      "breakdown": {
+        "Keandalan (Reliability/Durabilitas)": {
+          "contribution_percent": 60.83358362160758,
+          "criteria_weight": 0.557142857142857,
+          "local_weight": 0.5256370050144101,
+          "weighted_score": 0.29285490279374277
+        },
+        "Konsumsi Bahan Bakar (Efisiensi BBM)": {
+          "contribution_percent": 10.12991232670609,
+          "criteria_weight": 0.12261904761904761,
+          "local_weight": 0.3977011494252874,
+          "weighted_score": 0.048765736179529284
+        },
+        "Style (Gaya/Tampilan)": {
+          "contribution_percent": 29.03650405168634,
+          "criteria_weight": 0.3202380952380952,
+          "local_weight": 0.4364961636828645,
+          "weighted_score": 0.13978270003653634
+        }
+      },
+      "final_score": 0.48140333900980836,
+      "final_score_percent": 48.140333900980835,
+      "name": "Ertiga",
+      "rank": 1,
+      "raw_weights": {
+        "Keandalan (Reliability/Durabilitas)": 0.5256370050144101,
+        "Konsumsi Bahan Bakar (Efisiensi BBM)": 0.3977011494252874,
+        "Style (Gaya/Tampilan)": 0.4364961636828645
+      }
+    },
+    "consistency_summary": [
+      {
+        "ci": 0.011706349206349165,
+        "cr": 0.02018336070060201,
+        "is_consistent": true,
+        "lambda_max": 3.0234126984126983,
+        "matrix_name": "Kriteria (Style, Keandalan, BBM)",
+        "ri": 0.58,
+        "status": "Konsisten"
+      },
+      {
+        "ci": 0.06338672208013622,
+        "cr": 0.07042969120015136,
+        "is_consistent": true,
+        "lambda_max": 4.190160166240409,
+        "matrix_name": "Alternatif terhadap Kriteria Style (Gaya/Tampilan)",
+        "ri": 0.9,
+        "status": "Konsisten"
+      },
+      {
+        "ci": 0.05702717457699613,
+        "cr": 0.06336352730777348,
+        "is_consistent": true,
+        "lambda_max": 4.171081523730988,
+        "matrix_name": "Alternatif terhadap Kriteria Keandalan (Reliability/Durabilitas)",
+        "ri": 0.9,
+        "status": "Konsisten"
+      },
+      {
+        "ci": 0.03975893997445704,
+        "cr": 0.044176599971618935,
+        "is_consistent": true,
+        "lambda_max": 4.119276819923371,
+        "matrix_name": "Alternatif terhadap Kriteria Konsumsi Bahan Bakar (Efisiensi BBM)",
+        "ri": 0.9,
+        "status": "Konsisten"
+      }
+    ],
+    "criteria_weights": {
+      "Keandalan (Reliability/Durabilitas)": 0.557142857142857,
+      "Konsumsi Bahan Bakar (Efisiensi BBM)": 0.12261904761904761,
+      "Style (Gaya/Tampilan)": 0.3202380952380952
+    },
+    "data_source": "AHP_Studi_Kasus_Mobil.xlsx",
+    "ranked_alternatives": [
+      {
+        "breakdown": {
+          "Keandalan (Reliability/Durabilitas)": {
+            "contribution_percent": 60.83358362160758,
+            "criteria_weight": 0.557142857142857,
+            "local_weight": 0.5256370050144101,
+            "weighted_score": 0.29285490279374277
+          },
+          "Konsumsi Bahan Bakar (Efisiensi BBM)": {
+            "contribution_percent": 10.12991232670609,
+            "criteria_weight": 0.12261904761904761,
+            "local_weight": 0.3977011494252874,
+            "weighted_score": 0.048765736179529284
+          },
+          "Style (Gaya/Tampilan)": {
+            "contribution_percent": 29.03650405168634,
+            "criteria_weight": 0.3202380952380952,
+            "local_weight": 0.4364961636828645,
+            "weighted_score": 0.13978270003653634
+          }
+        },
+        "final_score": 0.48140333900980836,
+        "final_score_percent": 48.140333900980835,
+        "name": "Ertiga",
+        "rank": 1,
+        "raw_weights": {
+          "Keandalan (Reliability/Durabilitas)": 0.5256370050144101,
+          "Konsumsi Bahan Bakar (Efisiensi BBM)": 0.3977011494252874,
+          "Style (Gaya/Tampilan)": 0.4364961636828645
+        }
+      },
+      {
+        "breakdown": {
+          "Keandalan (Reliability/Durabilitas)": {
+            "contribution_percent": 55.207185653844014,
+            "criteria_weight": 0.557142857142857,
+            "local_weight": 0.2728430539590518,
+            "weighted_score": 0.15201255863432883
+          },
+          "Konsumsi Bahan Bakar (Efisiensi BBM)": {
+            "contribution_percent": 3.5894482764180697,
+            "criteria_weight": 0.12261904761904761,
+            "local_weight": 0.08060344827586208,
+            "weighted_score": 0.009883518062397373
+          },
+          "Style (Gaya/Tampilan)": {
+            "contribution_percent": 41.2033660697379,
+            "criteria_weight": 0.3202380952380952,
+            "local_weight": 0.3542774936061381,
+            "weighted_score": 0.11345314973815611
+          }
+        },
+        "final_score": 0.27534922643488235,
+        "final_score_percent": 27.534922643488237,
+        "name": "Grand Livina",
+        "rank": 2,
+        "raw_weights": {
+          "Keandalan (Reliability/Durabilitas)": 0.2728430539590518,
+          "Konsumsi Bahan Bakar (Efisiensi BBM)": 0.08060344827586208,
+          "Style (Gaya/Tampilan)": 0.3542774936061381
+        }
+      },
+      {
+        "breakdown": {
+          "Keandalan (Reliability/Durabilitas)": {
+            "contribution_percent": 46.77940298105584,
+            "criteria_weight": 0.557142857142857,
+            "local_weight": 0.12430697852632983,
+            "weighted_score": 0.06925674517895518
+          },
+          "Konsumsi Bahan Bakar (Efisiensi BBM)": {
+            "contribution_percent": 25.275270309395587,
+            "criteria_weight": 0.12261904761904761,
+            "local_weight": 0.30517241379310345,
+            "weighted_score": 0.037419950738916255
+          },
+          "Style (Gaya/Tampilan)": {
+            "contribution_percent": 27.945326709548574,
+            "criteria_weight": 0.3202380952380952,
+            "local_weight": 0.12919437340153453,
+            "weighted_score": 0.04137296005358665
+          }
+        },
+        "final_score": 0.14804965597145808,
+        "final_score_percent": 14.804965597145808,
+        "name": "Avanza",
+        "rank": 3,
+        "raw_weights": {
+          "Keandalan (Reliability/Durabilitas)": 0.12430697852632983,
+          "Konsumsi Bahan Bakar (Efisiensi BBM)": 0.30517241379310345,
+          "Style (Gaya/Tampilan)": 0.12919437340153453
+        }
+      },
+      {
+        "breakdown": {
+          "Keandalan (Reliability/Durabilitas)": {
+            "contribution_percent": 45.188712568475594,
+            "criteria_weight": 0.557142857142857,
+            "local_weight": 0.07721296250020825,
+            "weighted_score": 0.0430186505358303
+          },
+          "Konsumsi Bahan Bakar (Efisiensi BBM)": {
+            "contribution_percent": 27.88914093706436,
+            "criteria_weight": 0.12261904761904761,
+            "local_weight": 0.21652298850574714,
+            "weighted_score": 0.02654984263820471
+          },
+          "Style (Gaya/Tampilan)": {
+            "contribution_percent": 26.922146494460037,
+            "criteria_weight": 0.3202380952380952,
+            "local_weight": 0.08003196930946292,
+            "weighted_score": 0.0256292854098161
+          }
+        },
+        "final_score": 0.09519777858385112,
+        "final_score_percent": 9.519777858385112,
+        "name": "Xenia",
+        "rank": 4,
+        "raw_weights": {
+          "Keandalan (Reliability/Durabilitas)": 0.07721296250020825,
+          "Konsumsi Bahan Bakar (Efisiensi BBM)": 0.21652298850574714,
+          "Style (Gaya/Tampilan)": 0.08003196930946292
+        }
+      }
+    ],
+    "status": "success"
+  }
+}
